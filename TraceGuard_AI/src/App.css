@@ -1,0 +1,315 @@
+/* 1. FORCE KILL VITE DEFAULT ROOT LAYOUTS */
+html, body, #root {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #030712 !important;
+  overflow: hidden !important;
+  display: block !important; /* Overrides Vite's flex/grid centering layout */
+  position: relative !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 2. BASE CONTAINER CONFIGURATION */
+.app-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #f3f4f6;
+  font-family: 'Courier New', Courier, monospace, system-ui;
+  z-index: 2;
+}
+
+/* 3. NAVIGATION BAR LAYOUT */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(3, 7, 18, 0.9), transparent);
+  backdrop-filter: blur(4px);
+}
+
+.logo {
+  font-weight: 800;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo span { color: #00f0ff; }
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00f0ff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00f0ff;
+  animation: pulse 2s infinite;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+nav a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+nav a:hover { color: #00f0ff; }
+
+/* 4. TWO-COLUMN HERO LAYOUT (text left, robot right) */
+.hero-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 5;
+  padding: 110px 0 0 4rem;
+  pointer-events: none;
+}
+
+.hero-layout {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 550px;
+  text-align: left;
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+
+.security-tag {
+  color: #00f0ff;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, #ffffff, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.cta-group {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.25rem;
+}
+
+/* 5. RIGHT SIDE - ROBOT */
+.robot-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
+  position: relative;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.robot-section spline-wrapper,
+.spline-wrapper {
+  width: 100%;
+  max-width: 950px;
+  height: min(92vh, 920px);
+  display: block;
+  transform-origin: center bottom;
+}
+
+.spline-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 6. INTERACTIVE COMPONENT STYLINGS */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #00f0ff;
+  color: #000;
+  padding: 0.85rem 2rem;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+.btn-primary:hover {
+  background: #fff;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  padding: 0.6rem 1.5rem;
+}
+.btn-secondary:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #f3f4f6;
+  padding: 0.85rem 2rem;
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 7. IDENTITY GATEWAY SECURITY CARD */
+.modal-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  background: rgba(2, 4, 10, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background: rgba(6, 11, 25, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: 2.5rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+.auth-header { margin-bottom: 2rem; }
+.auth-header h2 { font-size: 1.6rem; letter-spacing: 1px; }
+.auth-header p { font-size: 0.85rem; margin-top: 0.25rem; color: #9ca3af; }
+
+.close-btn {
+  position: absolute;
+  top: 1.5rem; 
+  right: 1.5rem;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 1.5rem;
+}
+.close-btn:hover { color: #00f0ff; }
+
+.input-group { margin-bottom: 1.25rem; }
+.input-group label {
+  display: block; font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 0.5rem; color: #9ca3af;
+}
+.input-group input {
+  width: 100%; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1rem; border-radius: 4px; color: #fff; outline: none; transition: border-color 0.3s;
+}
+.input-group input:focus { border-color: #00f0ff; }
+
+.auth-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; margin-bottom: 2rem; }
+.auth-meta a { color: #00f0ff; text-decoration: none; }
+
+.btn-submit {
+  width: 100%; background: linear-gradient(90deg, #7000ff, #00f0ff);
+  color: #fff; padding: 0.9rem; border-radius: 4px; font-size: 1rem;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* 8. RESPONSIVE - stack vertically on smaller screens */
+@media (max-width: 1024px) {
+  .hero-section {
+    padding: 6rem 2rem 2rem;
+    overflow-y: auto;
+  }
+
+  .hero-layout {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .cta-group {
+    justify-content: center;
+  }
+
+  .robot-section {
+    margin-top: 20px;
+    justify-content: center;
+  }
+
+  .robot-section spline-viewer {
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+    transform: translateY(0) scale(0.85);
+  }
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .robot-section spline-viewer {
+    height: 400px;
+  }
+}
