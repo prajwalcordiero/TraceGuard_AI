@@ -10,7 +10,6 @@ import "./App.css";
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Handle browser navigation
   useEffect(() => {
@@ -28,7 +27,6 @@ export default function App() {
   const navigateTo = (newPath) => {
     window.history.pushState({}, "", newPath);
     setPath(newPath);
-    setIsModalOpen(false);
 
     window.scrollTo({
       top: 0,
@@ -91,7 +89,7 @@ export default function App() {
 
                 <button
                   className="btn-secondary"
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => navigateTo("/dashboard")}
                 >
                   Launch Portal
                 </button>
@@ -102,25 +100,19 @@ export default function App() {
               <div className="hero-layout">
                 {/* LEFT SIDE */}
                 <div className="hero-content animate-fade">
-                  
 
                   <h1>
-                    TraceGuard <span>AI</span>
+                    SHERLOCK <span>PK</span>
                   </h1>
 
                   <p>
-                    TraceGuard AI is an intelligent cyber-security platform that
-                    combines Artificial Intelligence with real-time monitoring to
-                    detect malware, financial fraud, suspicious APK behaviour and
-                    location-based threats before they become critical.
+                    TraceGuard AI uses Artificial Intelligence to detect malware, financial fraud, APK threats, and suspicious activities in real time.
                   </p>
-
-                  
 
                   <div className="cta-group">
                     <button
                       className="btn-primary"
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => navigateTo("/dashboard")}
                     >
                       Initialize System
                     </button>
@@ -153,85 +145,6 @@ export default function App() {
 
       {/* Render Current Page */}
       {renderPage()}
-
-      {/* Authentication Modal */}
-      {isModalOpen && (
-        <div
-          className="modal-overlay"
-          onClick={() => setIsModalOpen(false)}
-        >
-          <div
-            className="auth-card"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="close-btn"
-              onClick={() => setIsModalOpen(false)}
-            >
-              ×
-            </button>
-
-            <div className="auth-header">
-              <div className="auth-icon">🛡</div>
-              <h2>TraceGuard AI</h2>
-              <p>Secure Administrator Authentication</p>
-            </div>
-
-            <form
-              className="auth-form"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <div className="input-group">
-                <label>Administrator ID</label>
-                <input
-                  type="text"
-                  placeholder="admin@traceguard.ai"
-                  required
-                />
-              </div>
-
-              <div className="input-group">
-                <label>Password</label>
-                <input
-                  type="password"
-                  placeholder="••••••••••••••••"
-                  required
-                />
-              </div>
-
-              <div className="input-group">
-                <label>Security Token</label>
-                <input
-                  type="password"
-                  placeholder="Enter Security Token"
-                />
-              </div>
-
-              <div className="auth-meta">
-                <label className="checkbox-container">
-                  <input type="checkbox" />
-                  <span className="checkmark"></span>
-                  Remember this device
-                </label>
-                <a href="/">Forgot Password?</a>
-              </div>
-
-              <button
-                type="button"
-                className="btn-submit"
-                onClick={() => navigateTo("/dashboard")}
-              >
-                Authenticate
-              </button>
-            </form>
-
-            <div className="auth-footer">
-              <div className="status-dot"></div>
-              <span>AI Security Engine Online</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

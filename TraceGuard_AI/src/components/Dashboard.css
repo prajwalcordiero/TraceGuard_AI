@@ -1,115 +1,417 @@
-.dashboard-page{
-    position:absolute;
-    inset:0;
-    padding-top:120px;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    z-index:5;
-    overflow-y:auto;
+/* =====================================================
+   TRACEGUARD AI - DASHBOARD
+===================================================== */
+.dashboard-page {
+    --bg: #030712;
+    --panel: rgba(255,255,255,0.04);
+    --panel-hover: rgba(255,255,255,0.06);
+    --cyan: #00f0ff;
+    --text: #ffffff;
+    --muted: #9ca3af;
+    --border: rgba(0,240,255,0.15);
+
+    width: 100%;
+    height: 100vh;          /* Fixed screen height */
+    overflow: hidden;       /* Disable scrolling */
+
+    background: var(--bg);
+    color: var(--text);
+}
+
+.dashboard-page *{
+    box-sizing:border-box;
 }
 
 .dashboard-container{
-    width:90%;
-    max-width:1300px;
-    text-align:center;
+    max-width:1350px;
+    height:100%;
+    margin:auto;
+
+    padding:90px 40px 30px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
-.dashboard-container h1{
-    font-size:3rem;
-    margin-top:15px;
-    color:#fff;
+/* ===========================
+   TOP BAR
+=========================== */
+
+.dashboard-topbar{
+    display:flex;
+    justify-content:flex-start;
+    margin-bottom:30px;
 }
 
-.dashboard-container p{
-    color:#cbd5e1;
-    font-size:18px;
-    margin-bottom:45px;
-}
-
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:35px;
-}
-
-.dashboard-card{
-
-    background:rgba(8,15,30,.6);
-
-    border:1px solid rgba(0,240,255,.2);
-
-    backdrop-filter:blur(12px);
-
-    border-radius:20px;
-
-    padding:40px 30px;
-
+.back-btn{
+    background:transparent;
+    color:white;
+    border:1px solid rgba(255,255,255,.15);
+    padding:12px 22px;
+    border-radius:10px;
     cursor:pointer;
-
-    transition:.35s;
+    font-size:15px;
+    transition:.3s;
+    font-family:'Courier New', monospace;
 }
 
-.dashboard-card:hover{
-
-    transform:translateY(-12px);
-
-    border-color:#00f0ff;
-
-    box-shadow:0 0 30px rgba(0,240,255,.35);
+.back-btn:hover{
+    color:var(--cyan);
+    border-color:var(--cyan);
+    box-shadow:0 0 18px rgba(0,240,255,.25);
 }
 
-.card-icon{
+/* ===========================
+   HEADER
+=========================== */
 
-    font-size:70px;
-
-    margin-bottom:20px;
-}
-
-.dashboard-card h2{
-
-    color:#00f0ff;
-
+.security-tag{
+    text-align:center;
+    color:var(--cyan);
+    letter-spacing:4px;
+    font-size:13px;
     margin-bottom:15px;
 }
 
-.dashboard-card p{
-
-    color:#cbd5e1;
-
-    line-height:1.8;
-
-    min-height:90px;
+.dashboard-container h1{
+    text-align:center;
+    font-size:60px;
+    margin:0;
+    line-height:1.1;
+    background:linear-gradient(45deg,#fff,#b4c9ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-.dashboard-btn{
+.dashboard-container>p{
+    text-align:center;
+    color:var(--muted);
+    width:520px;
+    max-width:100%;
+    margin:18px auto 55px;
+    font-size:18px;
+    line-height:1.7;
+}
 
-    margin-top:20px;
+/* ===========================
+   GRID
+=========================== */
 
-    width:100%;
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:35px;
+}
 
-    padding:15px;
+/* ===========================
+   CARD HEADER
+=========================== */
 
-    border:none;
+.drop-module{
+    display:flex;
+    flex-direction:column;
+}
 
-    border-radius:10px;
+.drop-module-header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
 
-    background:linear-gradient(90deg,#7000ff,#00f0ff);
-
+.drop-module-header h2{
     color:white;
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+    text-align:center;
+}
+
+.drop-badge{
+    padding:8px 20px;
+    border-radius:30px;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-family:'Courier New', monospace;
+}
+
+.drop-badge.required{
+    background:var(--cyan);
+    color:black;
+    font-weight:bold;
+}
+
+.drop-badge.optional{
+    background:rgba(255,255,255,.05);
+    color:#b5bfd0;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.drop-box{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+
+    height:230px;
+
+    padding:28px;
+
+    display:flex;
+    flex-direction:column;
+
+    transition:.35s;
+
+    backdrop-filter:blur(12px);
+}
+
+.drop-box:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--cyan);
+
+    background:var(--panel-hover);
+
+    box-shadow:
+        0 0 30px rgba(0,240,255,.15);
+
+}
+
+.drop-box.drag-over{
+
+    border-color:var(--cyan);
+
+    box-shadow:
+        0 0 25px rgba(0,240,255,.25);
+
+}
+
+.drop-box p{
+
+    color:var(--muted);
+
+    text-align:center;
 
     font-size:16px;
 
-    font-weight:bold;
+    line-height:1.7;
+
+    margin:0 0 25px;
+
+}
+/* ==========================================
+   UPLOAD BOX
+========================================== */
+
+.drop-zone{
+
+    width:100%;
+
+    margin-top:auto;
+
+    border:2px dashed rgba(255,255,255,.12);
+
+    border-radius:14px;
+
+    padding:28px 20px;
+
+    text-align:center;
 
     cursor:pointer;
 
     transition:.3s;
+
+    background:rgba(255,255,255,.02);
+
 }
 
-.dashboard-btn:hover{
+.drop-zone:hover{
 
-    transform:scale(1.04);
+    border-color:var(--cyan);
 
-    box-shadow:0 0 20px rgba(0,240,255,.5);
+    background:rgba(0,240,255,.05);
+
+    box-shadow:0 0 20px rgba(0,240,255,.15);
+
+}
+
+.drop-box.drag-over .drop-zone{
+
+    border-color:var(--cyan);
+
+    background:rgba(0,240,255,.08);
+
+}
+
+/* ==========================================
+   FILE INPUT
+========================================== */
+
+.drop-input{
+
+    display:none;
+
+}
+
+.drop-zone-text{
+
+    color:#7f8aa3;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    transition:.3s;
+
+}
+
+.drop-zone-text strong{
+
+    display:block;
+
+    color:#dce4f5;
+
+    font-size:18px;
+
+    margin-bottom:6px;
+
+}
+
+.drop-zone-text small{
+
+    color:#768199;
+
+    font-size:14px;
+
+}
+
+.uploaded{
+
+    color:var(--cyan);
+
+    font-weight:600;
+
+    word-break:break-word;
+
+}
+
+/* ==========================================
+   CARD ANIMATION
+========================================== */
+
+.drop-module{
+
+    animation:fadeUp .7s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1100px){
+
+.dashboard-grid{
+
+    grid-template-columns:1fr;
+
+    gap:30px;
+
+}
+
+.dashboard-container{
+
+    padding:50px 25px;
+
+}
+
+.dashboard-container h1{
+
+    font-size:44px;
+
+}
+
+.dashboard-container>p{
+
+    width:100%;
+
+    font-size:16px;
+
+}
+
+.drop-box{
+
+    height:auto;
+
+    min-height:260px;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.dashboard-container{
+
+    padding:35px 18px;
+
+}
+
+.dashboard-container h1{
+
+    font-size:34px;
+
+}
+
+.drop-module-header h2{
+
+    font-size:22px;
+
+}
+
+.back-btn{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+.security-tag{
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+}
+
 }

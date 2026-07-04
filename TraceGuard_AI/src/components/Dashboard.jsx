@@ -1,87 +1,136 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./Dashboard.css";
 
-export default function Dashboard({ navigateTo }) {
+function DropModule({
+  title,
+  description,
+  badge,
+  fileName,
+  onFile,
+}) {
+  const inputRef = useRef(null);
+  const [dragOver, setDragOver] = useState(false);
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+
+    const file = e.dataTransfer.files[0];
+    if (file) onFile(file.name);
+  };
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    if (file) onFile(file.name);
+  };
+
   return (
-    <main className="dashboard-page">
+    <div className="drop-module">
+      <div className="drop-module-header">
+        <h2>{title}</h2>
 
-      <div className="dashboard-container">
-
-        <div className="security-tag">
-          // TRACEGUARD AI DASHBOARD //
-        </div>
-
-        <h1>Welcome to TraceGuard AI</h1>
-
-        <p>
-          Select one of the intelligent modules below to continue.
-        </p>
-
-        <div className="dashboard-grid">
-
-          {/* Google Maps */}
-
-          <div
-            className="dashboard-card"
-            onClick={() =>
-              window.open("https://www.google.com/maps", "_blank")
-            }
-          >
-            <div className="card-icon">📍</div>
-
-            <h2>Google Maps</h2>
-
-            <p>
-              Open Google Maps and access live location services.
-            </p>
-
-            <button className="dashboard-btn">
-              Open Maps →
-            </button>
-          </div>
-
-          {/* APK */}
-
-          <div
-            className="dashboard-card"
-            onClick={() => navigateTo("/apk-analysis")}
-          >
-            <div className="card-icon">📱</div>
-
-            <h2>APK Threat Analysis</h2>
-
-            <p>
-              Scan Android APK files using AI-powered malware detection.
-            </p>
-
-            <button className="dashboard-btn">
-              Open Module →
-            </button>
-          </div>
-
-          {/* Financial */}
-
-          <div
-            className="dashboard-card"
-            onClick={() => navigateTo("/financial-analysis")}
-          >
-            <div className="card-icon">💳</div>
-
-            <h2>Financial Threat Analysis</h2>
-
-            <p>
-              Detect fraudulent transactions, phishing attacks and banking threats.
-            </p>
-
-            <button className="dashboard-btn">
-              Open Module →
-            </button>
-          </div>
-
-        </div>
-
+        <span
+          className={`drop-badge ${
+            badge === "Required" ? "required" : "optional"
+          }`}
+        >
+          {badge}
+        </span>
       </div>
 
+      <div
+        className={`drop-box ${dragOver ? "drag-over" : ""}`}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragOver(true);
+        }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={handleDrop}
+      >
+        <p>{description}</p>
+
+        <div
+          className="drop-zone"
+          onClick={() => inputRef.current.click()}
+        >
+          <input
+            ref={inputRef}
+            className="drop-input"
+            type="file"
+            onChange={handleChange}
+          />
+
+          {fileName ? (
+            <span className="drop-zone-text uploaded">
+              {fileName}
+            </span>
+          ) : (
+            <span className="drop-zone-text">
+              <strong>Drag & Drop File</strong>
+              <br />
+              <small>or Click to Upload</small>
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function Dashboard({ navigateTo }) {
+  const [callLogs, setCallLogs] = useState("");
+  const [apkFile, setApkFile] = useState("");
+  const [financialFile, setFinancialFile] = useState("");
+
+  return (
+    <main className="dashboard-page">
+      <div className="dashboard-container">
+
+        {/* Back Button */}
+        <div className="dashboard-topbar">
+          <button
+            className="back-btn"
+            onClick={() => navigateTo("/")}
+          >
+            ← Back to Home
+          </button>
+        </div>
+
+        {/* Header */}
+        
+
+        <h1>Threat Analysis Dashboard</h1>
+
+        <p>
+          Upload files to begin AI-powered cyber threat detection.
+        </p>
+
+        {/* Cards */}
+        <div className="dashboard-grid">
+
+          <DropModule
+            title="Call Log Analysis"
+            badge="Optional"
+            fileName={callLogs}
+            onFile={setCallLogs}
+          />
+
+          <DropModule
+            title="APK Threat Analysis"
+            badge="Required"
+            fileName={apkFile}
+            onFile={setApkFile}
+          />
+
+          <DropModule
+            title="Financial Analysis"
+            badge="Optional"
+            fileName={financialFile}
+            onFile={setFinancialFile}
+          />
+
+        </div>
+      </div>
     </main>
   );
 }

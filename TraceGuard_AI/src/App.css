@@ -119,16 +119,20 @@ h1 {
   background: linear-gradient(45deg, #ffffff, #a5b4fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+    position: relative;
+  top: -100px;
 }
 
 p {
-  color: #9ca3af;
+  color: white;
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2.5rem;
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
+    position: relative;
+  top: -100px;
 }
 
 .cta-group {
@@ -171,6 +175,27 @@ button {
   font-weight: 600;
   font-family: inherit;
   transition: all 0.3s ease;
+
+  position: relative;
+  top: -100px;
+}
+
+/* ===========================
+   NAVIGATION BUTTONS
+=========================== */
+
+.nav-link-btn {
+  position: relative;
+  padding: 12px 24px;
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  overflow: hidden;
 }
 
 .btn-primary {

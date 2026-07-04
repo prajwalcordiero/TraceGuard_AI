@@ -1,280 +1,265 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./DocumentationPage.css";
+import {
+  BookIcon,
+  RocketIcon,
+  LayersIcon,
+  SettingsIcon,
+  CodeIcon,
+  ShieldCheckIcon,
+  GlobeIcon,
+  ActivityIcon,
+  ZapIcon,
+  LockIcon,
+  CpuIcon,
+  TrendingUpIcon,
+  CheckIcon,
+} from "./Icons";
+
+const SECTIONS = [
+  { id: "overview", label: "overview", icon: BookIcon },
+  { id: "features", label: "features", icon: RocketIcon },
+  { id: "architecture", label: "architecture", icon: LayersIcon },
+  { id: "workflow", label: "workflow", icon: SettingsIcon },
+  { id: "technologies", label: "technologies", icon: CodeIcon },
+  { id: "security", label: "security", icon: ShieldCheckIcon },
+  { id: "future", label: "roadmap", icon: GlobeIcon },
+];
+
+const FEATURES = [
+  { icon: ShieldCheckIcon, title: "Threat Detection", desc: "Detect malicious activity using intelligent AI algorithms trained on live attack patterns." },
+  { icon: ActivityIcon, title: "Real-time Monitoring", desc: "Track network traffic and user behaviour continuously, with no polling delay." },
+  { icon: ZapIcon, title: "Instant Alerts", desc: "Notify administrators the moment a threat signature is matched." },
+  { icon: LockIcon, title: "Secure Authentication", desc: "Multi-level authentication gates every sensitive resource in the system." },
+  { icon: CpuIcon, title: "AI Prediction", desc: "Forecast likely attack vectors before they escalate into active incidents." },
+  { icon: TrendingUpIcon, title: "Analytics Dashboard", desc: "An interactive visual dashboard surfaces attack statistics at a glance." },
+];
+
+const PIPELINE = ["User", "TraceGuard AI Server", "AI Detection Engine", "Threat Database", "Admin Dashboard"];
+
+const WORKFLOW = [
+  { title: "User login request", desc: "The client submits credentials to the auth gateway." },
+  { title: "Credential validation", desc: "Identity is checked against the encrypted credential store." },
+  { title: "AI behaviour analysis", desc: "The detection engine scores the session for anomalies." },
+  { title: "Threat classification", desc: "Flagged sessions are ranked by severity and type." },
+  { title: "Secure authentication", desc: "Clean sessions are issued a signed access token." },
+  { title: "Dashboard access", desc: "The user lands on the monitoring dashboard, fully scoped to their role." },
+];
+
+const TECH = ["React.js", "Node.js", "Express", "Python", "TensorFlow", "MongoDB", "REST API", "JWT Auth"];
+
+const SECURITY = [
+  "Multi-factor authentication",
+  "Role-based access control",
+  "Encrypted password storage",
+  "AI threat intelligence",
+  "Behaviour monitoring",
+  "Secure session handling",
+];
 
 export default function DocumentationPage({ onBack }) {
+  const [activeSection, setActiveSection] = useState(SECTIONS[0].id);
+  const scrollRef = useRef(null);
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    const rootEl = scrollRef.current;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        root: rootEl,
+        rootMargin: "-10% 0px -70% 0px",
+        threshold: 0,
+      }
+    );
+
+    SECTIONS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observerRef.current.observe(el);
+    });
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <main className="docs-page">
+    /* CRITICAL FIX: id="docs-root" applied here */
+    <div id="docs-root" className="docs-page" ref={scrollRef}>
+      
+      {/* ================= TOP BAR ================= */}
+      <header className="docs-topbar">
+        <button className="topbar-back" onClick={onBack}>
+          <span aria-hidden="true">←</span> Back to Home
+        </button>
 
-      <div className="docs-container">
-
-        <div className="docs-header">
-
-          <div className="security-tag">
-            // TRACEGUARD AI DOCUMENTATION //
-          </div>
-
-          <h1>TraceGuard AI</h1>
-
-          <p>
-            AI-powered Cybersecurity Monitoring and Intelligent Threat Detection
-            Platform designed to monitor activities, detect anomalies and secure
-            digital infrastructure using Machine Learning.
-          </p>
-
-          <button className="btn-primary" onClick={onBack}>
-            ← Back to Home
-          </button>
-
+        <div className="topbar-crumb">
+          <span className="pulse-dot"></span>
+          TRACEGUARD <span className="crumb-sep">/</span> docs
         </div>
 
-        {/* ================= OVERVIEW ================= */}
+        <div className="topbar-version">v1.0.0</div>
+      </header>
 
-        <section className="doc-card">
+      <div className="docs-body">
+        {/* ================= SIDEBAR ================= */}
+        <aside className="docs-sidebar">
+          <div className="sidebar-path">~/traceguard/docs $</div>
 
-          <div className="card-title">
-            📘 Project Overview
+          <nav className="sidebar-nav" aria-label="Documentation sections">
+            {SECTIONS.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <button
+                  key={s.id}
+                  className={`sidebar-link ${activeSection === s.id ? "active" : ""}`}
+                  onClick={() => scrollToSection(s.id)}
+                >
+                  <Icon className="sidebar-icon" width={15} height={15} />
+                  <span className="sidebar-label">{s.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          <div className="sidebar-footer">
+            <span className="status-dot-sm"></span>
+            engine online
+          </div>
+        </aside>
+
+        {/* ================= MAIN CONTENT ================= */}
+        <main className="docs-container">
+
+          <div className="docs-hero">
+            <div className="security-tag">// TRACEGUARD AI DOCUMENTATION //</div>
+            <h1>TraceGuard AI</h1>
+            <p>
+              AI-powered cybersecurity monitoring and intelligent threat detection
+              platform, built to watch activity, surface anomalies, and secure
+              digital infrastructure using machine learning.
+            </p>
           </div>
 
-          <p>
-            TraceGuard AI is an intelligent cybersecurity platform capable of
-            continuously monitoring user activities and system events to detect
-            suspicious behaviour using Artificial Intelligence. The system
-            provides administrators with real-time threat alerts while reducing
-            false positives through intelligent behavioural analysis.
-          </p>
+          {/* ================= OVERVIEW ================= */}
+          <section className="doc-card" id="overview">
+            <div className="card-title"><BookIcon className="title-icon" />Project Overview</div>
+            <p>
+              TraceGuard AI continuously monitors user activity and system events to
+              detect suspicious behaviour using artificial intelligence. Administrators
+              get real-time threat alerts, while behavioural analysis keeps false
+              positives low.
+            </p>
+          </section>
 
-        </section>
+          {/* ================= FEATURES ================= */}
+          <section className="doc-card" id="features">
+            <div className="card-title"><RocketIcon className="title-icon" />Core Features</div>
 
-        {/* ================= FEATURES ================= */}
-
-        <section className="doc-card">
-
-          <div className="card-title">
-            🚀 Core Features
-          </div>
-
-          <div className="feature-grid">
-
-            <div className="feature-box">
-              <h3>🛡 Threat Detection</h3>
-              <p>
-                Detect malicious activities using intelligent AI algorithms.
-              </p>
+            <div className="feature-grid">
+              {FEATURES.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div className="feature-box" key={f.title}>
+                    <Icon className="feature-icon" />
+                    <h3>{f.title}</h3>
+                    <p>{f.desc}</p>
+                  </div>
+                );
+              })}
             </div>
+          </section>
 
-            <div className="feature-box">
-              <h3>📊 Real-time Monitoring</h3>
-              <p>
-                Monitor network traffic and user behaviour continuously.
-              </p>
+          {/* ================= ARCHITECTURE ================= */}
+          <section className="doc-card" id="architecture">
+            <div className="card-title"><LayersIcon className="title-icon" />System Architecture</div>
+            <p className="card-subtext">Request flow through the platform, end to end.</p>
+
+            <div className="pipeline">
+              {PIPELINE.map((step, i) => (
+                <React.Fragment key={step}>
+                  <div className="pipeline-step">
+                    <span className="pipeline-index">{String(i + 1).padStart(2, "0")}</span>
+                    {step}
+                  </div>
+                  {i < PIPELINE.length - 1 && <span className="pipeline-pipe" aria-hidden="true">|</span>}
+                </React.Fragment>
+              ))}
             </div>
+          </section>
 
-            <div className="feature-box">
-              <h3>⚡ Instant Alerts</h3>
-              <p>
-                Notify administrators immediately whenever threats are found.
-              </p>
+          {/* ================= WORKFLOW ================= */}
+          <section className="doc-card" id="workflow">
+            <div className="card-title"><SettingsIcon className="title-icon" />Authentication Workflow</div>
+
+            <div className="timeline">
+              {WORKFLOW.map((step, i) => (
+                <div className="timeline-step" key={step.title}>
+                  <div className="timeline-marker">{i + 1}</div>
+                  <div className="timeline-text">
+                    <h4>{step.title}</h4>
+                    <p>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
+          </section>
 
-            <div className="feature-box">
-              <h3>🔒 Secure Authentication</h3>
-              <p>
-                Multi-level authentication protects sensitive resources.
-              </p>
+          {/* ================= TECHNOLOGIES ================= */}
+          <section className="doc-card" id="technologies">
+            <div className="card-title"><CodeIcon className="title-icon" />Technologies Used</div>
+
+            <div className="tech-grid">
+              {TECH.map((t) => (
+                <div className="tech-box" key={t}>{t}</div>
+              ))}
             </div>
-
-            <div className="feature-box">
-              <h3>🤖 AI Prediction</h3>
-              <p>
-                Predict possible attacks before they become serious threats.
-              </p>
-            </div>
-
-            <div className="feature-box">
-              <h3>📈 Analytics Dashboard</h3>
-              <p>
-                Interactive visual dashboard showing attack statistics.
-              </p>
-            </div>
-
-          </div>
-
-        </section>
-
-        {/* ================= ARCHITECTURE ================= */}
-
-        <section className="doc-card">
-
-          <div className="card-title">
-            🏗 System Architecture
-          </div>
-
-          <div className="architecture-grid">
-
-            <div className="arch-box">
-              User
-            </div>
-
-            <div className="arrow">
-              ➜
-            </div>
-
-            <div className="arch-box">
-              TraceGuard AI Server
-            </div>
-
-            <div className="arrow">
-              ➜
-            </div>
-
-            <div className="arch-box">
-              AI Detection Engine
-            </div>
-
-            <div className="arrow">
-              ➜
-            </div>
-
-            <div className="arch-box">
-              Threat Database
-            </div>
-
-            <div className="arrow">
-              ➜
-            </div>
-
-            <div className="arch-box">
-              Admin Dashboard
-            </div>
-
-          </div>
-
-        </section>
-
-        {/* ================= WORKFLOW ================= */}
-
-        <section className="doc-card">
-
-          <div className="card-title">
-            ⚙ Authentication Workflow
-          </div>
-
-          <div className="timeline">
-
-            <div className="timeline-step">
-              1. User Login Request
-            </div>
-
-            <div className="timeline-step">
-              2. Credential Validation
-            </div>
-
-            <div className="timeline-step">
-              3. AI Behaviour Analysis
-            </div>
-
-            <div className="timeline-step">
-              4. Threat Classification
-            </div>
-
-            <div className="timeline-step">
-              5. Secure Authentication
-            </div>
-
-            <div className="timeline-step">
-              6. Dashboard Access
-            </div>
-
-          </div>
-
-        </section>
-
-        {/* ================= TECHNOLOGIES ================= */}
-
-        <section className="doc-card">
-
-          <div className="card-title">
-            💻 Technologies Used
-          </div>
-
-          <div className="tech-grid">
-
-            <div className="tech-box">React.js</div>
-
-            <div className="tech-box">Node.js</div>
-
-            <div className="tech-box">Express</div>
-
-            <div className="tech-box">Python</div>
-
-            <div className="tech-box">TensorFlow</div>
-
-            <div className="tech-box">MongoDB</div>
-
-            <div className="tech-box">REST API</div>
-
-            <div className="tech-box">JWT Authentication</div>
-
-          </div>
-
-        </section>
-
-        {/* ================= SECURITY ================= */}
-
-        <section className="doc-card">
-
-          <div className="card-title">
-            🔐 Security Modules
-          </div>
-
-          <ul className="security-list">
-
-            <li>✔ Multi-factor Authentication</li>
-
-            <li>✔ Role Based Access Control</li>
-
-            <li>✔ Encrypted Password Storage</li>
-
-            <li>✔ AI Threat Intelligence</li>
-
-            <li>✔ Behaviour Monitoring</li>
-
-            <li>✔ Secure Session Handling</li>
-
-          </ul>
-
-        </section>
-
-        {/* ================= FUTURE ================= */}
-
-        <section className="doc-card">
-
-          <div className="card-title">
-            🌍 Future Enhancements
-          </div>
-
-          <p>
-            Future versions of TraceGuard AI will integrate blockchain-based
-            authentication, advanced deep learning models, cloud-native
-            deployment, distributed threat intelligence sharing, autonomous
-            incident response and predictive cyber defence mechanisms for
-            enterprise-scale environments.
-          </p>
-
-        </section>
-
-        <footer className="docs-footer">
-
-          <h3>TraceGuard AI</h3>
-
-          <p>
-            Intelligent Cybersecurity Through Artificial Intelligence
-          </p>
-
-        </footer>
-
+          </section>
+
+          {/* ================= SECURITY ================= */}
+          <section className="doc-card" id="security">
+            <div className="card-title"><ShieldCheckIcon className="title-icon" />Security Modules</div>
+
+            <ul className="security-list">
+              {SECURITY.map((s) => (
+                <li key={s}>
+                  <span className="check-icon"><CheckIcon width={12} height={12} /></span>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* ================= FUTURE ================= */}
+          <section className="doc-card" id="future">
+            <div className="card-title"><GlobeIcon className="title-icon" />Future Enhancements</div>
+            <p>
+              Future versions of TraceGuard AI will integrate blockchain-based
+              authentication, advanced deep learning models, cloud-native
+              deployment, distributed threat intelligence sharing, autonomous
+              incident response, and predictive cyber defence for
+              enterprise-scale environments.
+            </p>
+          </section>
+
+          <footer className="docs-footer">
+            <h3>TraceGuard AI</h3>
+            <p>Intelligent Cybersecurity Through Artificial Intelligence</p>
+          </footer>
+
+        </main>
       </div>
-
-    </main>
+    </div>
   );
 }
