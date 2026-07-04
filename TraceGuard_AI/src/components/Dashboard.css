@@ -54,6 +54,11 @@
     font-size:15px;
     transition:.3s;
     font-family:'Courier New', monospace;
+     position: relative;
+    z-index: 10;
+    top: 100px;
+    left: -500px;
+
 }
 
 .back-btn:hover{

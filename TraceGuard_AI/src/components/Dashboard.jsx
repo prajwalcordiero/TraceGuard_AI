@@ -84,26 +84,24 @@ export default function Dashboard({ navigateTo }) {
 
   return (
     <main className="dashboard-page">
-      <div className="dashboard-container">
-
-        {/* Back Button */}
-        <div className="dashboard-topbar">
+        
           <button
             className="back-btn"
             onClick={() => navigateTo("/")}
           >
             ← Back to Home
           </button>
-        </div>
+      <div className="dashboard-container">
+
+        
+       
 
         {/* Header */}
         
 
         <h1>Threat Analysis Dashboard</h1>
 
-        <p>
-          Upload files to begin AI-powered cyber threat detection.
-        </p>
+        
 
         {/* Cards */}
         <div className="dashboard-grid">

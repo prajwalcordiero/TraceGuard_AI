@@ -3,8 +3,6 @@ import SoftAurora from "./components/SoftAurora";
 import Lightfall from "./components/Lightfall";
 import DocumentationPage from "./components/DocumentationPage";
 import Dashboard from "./components/Dashboard";
-import APKThreatAnalysis from "./components/APKThreatAnalysis";
-import FinancialThreatAnalysis from "./components/FinancialThreatAnalysis";
 import SplineRobot from "./components/Splinerobot";
 import "./App.css";
 
@@ -38,7 +36,12 @@ export default function App() {
   const renderPage = () => {
     switch (path) {
       case "/docs":
-        return <DocumentationPage onBack={() => navigateTo("/")} />;
+        return (
+          <DocumentationPage 
+            onBack={() => navigateTo("/")} 
+            onNavigateToThreats={() => navigateTo("/threats")} 
+          />
+        );
 
       case "/dashboard":
         return <Dashboard navigateTo={navigateTo} />;
@@ -102,7 +105,7 @@ export default function App() {
                 <div className="hero-content animate-fade">
 
                   <h1>
-                    SHERLOCK <span>PK</span>
+                    SHERLOCK <span>APK</span>
                   </h1>
 
                   <p>
