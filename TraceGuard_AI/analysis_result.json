@@ -1,0 +1,81 @@
+{
+  "static": {
+    "package_name": "com.github.characterdog.bmicalculator",
+    "version": "1.3",
+    "signature": [
+      "META-INF/2A63BBCF.RSA"
+    ],
+    "permissions_all": [],
+    "permissions_flagged": [],
+    "iocs": {
+      "ip": [],
+      "url": [
+        "http://play.google.com/store/apps/details?id=",
+        "http://schemas.android.com/apk/res-auto",
+        "http://schemas.android.com/apk/res/android",
+        "https://crowdin.com/project/characterdog-bmi-calculator",
+        "https://github.com/characterdog",
+        "https://github.com/characterdog/bmi-calculator/blob/master/LICENSE",
+        "https://play.google.com/store/apps/details?id="
+      ],
+      "domain": [
+        "android.com",
+        "crowdin.com",
+        "github.com",
+        "google.com"
+      ],
+      "email": []
+    }
+  },
+  "dynamic": {
+    "domains": [
+      "www.googleadservices.com",
+      "www.youtube.com",
+      "youtubei.googleapis.com"
+    ],
+    "dest_ips": [
+      "142.250.77.98",
+      "216.239.34.223"
+    ],
+    "connections": [
+      {
+        "ip": "216.239.34.223",
+        "port": "443",
+        "domain": "youtubei.googleapis.com"
+      },
+      {
+        "ip": "142.250.77.98",
+        "port": "443",
+        "domain": "www.googleadservices.com"
+      }
+    ]
+  },
+  "correlation": {
+    "confirmed_domains": [],
+    "confirmed_ips": [],
+    "static_only_domains": [
+      "android.com",
+      "crowdin.com",
+      "github.com",
+      "google.com",
+      "http://play.google.com/store/apps/details?id=",
+      "http://schemas.android.com/apk/res-auto",
+      "http://schemas.android.com/apk/res/android",
+      "https://crowdin.com/project/characterdog-bmi-calculator",
+      "https://github.com/characterdog",
+      "https://github.com/characterdog/bmi-calculator/blob/master/LICENSE",
+      "https://play.google.com/store/apps/details?id="
+    ],
+    "static_only_ips": [],
+    "dynamic_only_domains": [
+      "www.googleadservices.com",
+      "www.youtube.com",
+      "youtubei.googleapis.com"
+    ],
+    "dynamic_only_ips": [
+      "142.250.77.98",
+      "216.239.34.223"
+    ],
+    "flag": "Possible remote C2 / server-driven config: app contacted servers never referenced in the app's own code."
+  }
+}

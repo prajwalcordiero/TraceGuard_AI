@@ -1,0 +1,124 @@
+{
+  "static": {
+    "package_name": "com.ozxwbg.zbiltp",
+    "version": "16.12.0",
+    "signature": [
+      "META-INF/CERT.RSA"
+    ],
+    "permissions_all": [
+      "android.permission.RECEIVE_SMS",
+      "android.permission.QUERY_ALL_PACKAGES",
+      "android.permission.READ_SMS",
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.INTERNET",
+      "android.permission.SCHEDULE_EXACT_ALARM",
+      "android.permission.CALL_PHONE",
+      "com.google.android.c2dm.permission.RECEIVE",
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.RECEIVE_BOOT_COMPLETED",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+      "android.permission.BIND_NOTIFICATION_LISTENER_SERVICE",
+      "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+      "android.permission.READ_PHONE_STATE",
+      "android.permission.WAKE_LOCK",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.READ_CONTACTS",
+      "android.permission.FOREGROUND_SERVICE_DATA_SYNC",
+      "android.permission.READ_MEDIA_IMAGES",
+      "com.ozxwbg.zbiltp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+      "android.permission.READ_PHONE_NUMBERS",
+      "android.permission.SEND_SMS"
+    ],
+    "permissions_flagged": [
+      "android.permission.READ_SMS",
+      "android.permission.READ_CONTACTS",
+      "android.permission.SEND_SMS"
+    ],
+    "iocs": {
+      "ip": [
+        "97.74.82.16"
+      ],
+      "url": [
+        "http://97.74.82.16:5001/",
+        "http://schemas.android.com/apk/res-auto",
+        "http://schemas.android.com/apk/res/android",
+        "https://developer.android.com/training/articles/direct-boot",
+        "https://firebase-settings.crashlytics.com/spi/v2/platforms/android/gmp/",
+        "https://firebase.google.com/docs/crashlytics/get-started?platform=android#add-plugin",
+        "https://firebase.google.com/support/privacy/init-options.",
+        "https://firebaseinstallations.googleapis.com/v1/",
+        "https://github.com/google/gson/blob/main/Troubleshooting.md#",
+        "https://issuetracker.google.com/issues/241760537",
+        "https://issuetracker.google.com/issues/new?component=907884&template=1466542",
+        "https://youtrack.jetbrains.com/issue/KT-55980"
+      ],
+      "domain": [
+        "android.com",
+        "android.net",
+        "android.org",
+        "coroutines.io",
+        "crashlytics.com",
+        "engine.io",
+        "github.com",
+        "gms.org",
+        "google.com",
+        "googleapis.com",
+        "java.net",
+        "javax.net",
+        "jetbrains.com",
+        "libcore.io",
+        "openjsse.net",
+        "socket.io"
+      ],
+      "email": [
+        "android@android.com"
+      ]
+    }
+  },
+  "dynamic": {
+    "domains": [],
+    "dest_ips": [],
+    "connections": []
+  },
+  "correlation": {
+    "confirmed_domains": [],
+    "confirmed_ips": [],
+    "static_only_domains": [
+      "android.com",
+      "android.net",
+      "android.org",
+      "coroutines.io",
+      "crashlytics.com",
+      "engine.io",
+      "github.com",
+      "gms.org",
+      "google.com",
+      "googleapis.com",
+      "http://97.74.82.16:5001/",
+      "http://schemas.android.com/apk/res-auto",
+      "http://schemas.android.com/apk/res/android",
+      "https://developer.android.com/training/articles/direct-boot",
+      "https://firebase-settings.crashlytics.com/spi/v2/platforms/android/gmp/",
+      "https://firebase.google.com/docs/crashlytics/get-started?platform=android#add-plugin",
+      "https://firebase.google.com/support/privacy/init-options.",
+      "https://firebaseinstallations.googleapis.com/v1/",
+      "https://github.com/google/gson/blob/main/Troubleshooting.md#",
+      "https://issuetracker.google.com/issues/241760537",
+      "https://issuetracker.google.com/issues/new?component=907884&template=1466542",
+      "https://youtrack.jetbrains.com/issue/KT-55980",
+      "java.net",
+      "javax.net",
+      "jetbrains.com",
+      "libcore.io",
+      "openjsse.net",
+      "socket.io"
+    ],
+    "static_only_ips": [
+      "97.74.82.16"
+    ],
+    "dynamic_only_domains": [],
+    "dynamic_only_ips": [],
+    "flag": "No unexplained runtime connections detected."
+  }
+}

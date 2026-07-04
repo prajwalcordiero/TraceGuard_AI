@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TraceGuard_AI</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { Renderer, Program, Mesh, Triangle } from 'https://cdn.jsdelivr.net/npm/ogl@0.0.116/+esm';
+    window.OGL = { Renderer, Program, Mesh, Triangle };
+  </script>
+</head>
+<body>
+
+  <div id="aurora-container" class="bg-layer"></div>
+
+  <div id="lightfall-container" class="bg-layer"></div>
+
+  <header class="navbar">
+    <div class="logo">
+      <span class="pulse-dot"></span> TraceGuard<span>AI</span>
+    </div>
+    <nav>
+      <a href="#features">Protocols</a>
+      <a href="#network">Network</a>
+      <button class="btn-secondary" id="open-auth-btn">Launch Console</button>
+    </nav>
+  </header>
+
+  <main class="hero-section">
+    <div class="hero-content">
+      <div class="security-tag">// SYSTEM STATUS: SECURE</div>
+      <h1>Decentralized Authentication</h1>
+      <p>Eliminate credentials. Mitigate vectors. Deploy cryptographic zero-trust validation across edge networks seamlessly.</p>
+      <div class="cta-group">
+        <button class="btn-primary" id="hero-auth-btn">Initialize Portal</button>
+        <button class="btn-outline">Read Whitepaper</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="auth-modal">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Identity Gateway</h2>
+        <p>Establish secure telemetry session</p>
+        <button class="close-btn" id="close-auth-btn">&times;</button>
+      </div>
+      <form class="auth-form" onsubmit="event.preventDefault();">
+        <div class="input-group">
+          <label>Access Key / Node Identifier</label>
+          <input type="text" placeholder="node_identity@domain.sec" required>
+        </div>
+        <div class="input-group">
+          <label>Cryptographic Token</label>
+          <input type="password" placeholder="••••••••••••••••" required>
+        </div>
+        <div class="auth-meta">
+          <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkmark"></span> Persist session
+          </label>
+          <a href="#">Recover Node</a>
+        </div>
+        <button type="submit" class="btn-submit">Authenticate Node</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="effects.js"></script>
+</body>
+</html>
