@@ -1,0 +1,84 @@
+{
+  "static": {
+    "package_name": "com.uisy.cache.installertest",
+    "version": "1.0",
+    "signature": [],
+    "certificate_details": [
+      {
+        "subject": "CN=Auto,OU=Dev,O=Auto,L=Delhi,ST=Delhi,C=IN",
+        "issuer": "CN=Auto,OU=Dev,O=Auto,L=Delhi,ST=Delhi,C=IN",
+        "serial_number": "12696671484521869777",
+        "valid_from": "2026-05-30T04:14:40+00:00",
+        "valid_until": "2053-10-15T04:14:40+00:00",
+        "signature_algorithm": "sha384WithRSAEncryption",
+        "sha256_fingerprint": "fda1c8ce595576b96540d9f4aa68809aef51c80568f8b0a3ca8655b08ae2dc38",
+        "is_self_signed": true
+      }
+    ],
+    "permissions_all": [
+      "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+      "android.permission.QUERY_ALL_PACKAGES",
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.INTERNET",
+      "com.uisy.cache.installertest.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+      "android.permission.REQUEST_INSTALL_PACKAGES"
+    ],
+    "permissions_flagged": [
+      "android.permission.REQUEST_INSTALL_PACKAGES"
+    ],
+    "iocs": {
+      "ip": [],
+      "url": [
+        "http://schemas.android.com/apk/res/android",
+        "https://goo.gle/compose-feedback",
+        "https://issuetracker.google.com/issues/297974033",
+        "https://issuetracker.google.com/issues/300280216",
+        "https://youtrack.jetbrains.com/issue/KT-55980"
+      ],
+      "domain": [
+        "android.com",
+        "coroutines.io",
+        "google.com",
+        "jetbrains.com"
+      ],
+      "email": []
+    },
+    "phone_number_details": [
+      {
+        "number": "2131230721",
+        "valid": true,
+        "region": "India",
+        "carrier": "Unknown",
+        "country_code": "IN"
+      }
+    ]
+  },
+  "dynamic": {
+    "domains": [],
+    "dest_ips": [],
+    "connections": []
+  },
+  "correlation": {
+    "confirmed_domains": [],
+    "confirmed_ips": [],
+    "static_only_domains": [
+      "android.com",
+      "coroutines.io",
+      "google.com",
+      "http://schemas.android.com/apk/res/android",
+      "https://goo.gle/compose-feedback",
+      "https://issuetracker.google.com/issues/297974033",
+      "https://issuetracker.google.com/issues/300280216",
+      "https://youtrack.jetbrains.com/issue/KT-55980",
+      "jetbrains.com"
+    ],
+    "static_only_ips": [],
+    "dynamic_only_domains": [],
+    "dynamic_only_ips": [],
+    "flag": "No unexplained runtime connections detected."
+  },
+  "kill_switch": {
+    "triggered": false,
+    "reason": null
+  }
+}

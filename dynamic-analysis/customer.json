@@ -1,0 +1,164 @@
+{
+  "static": {
+    "package_name": "scanner.scrubber.processor",
+    "version": "58.142.61 config",
+    "signature": [
+      "META-INF/KEY.RSA"
+    ],
+    "certificate_details": [
+      {
+        "subject": "1.2.840.113549.1.9.1=android@android.com,CN=Android,OU=Android,O=Android,L=Mountain View,ST=California,C=US",
+        "issuer": "1.2.840.113549.1.9.1=android@android.com,CN=Android,OU=Android,O=Android,L=Mountain View,ST=California,C=US",
+        "serial_number": "10623618503190643167",
+        "valid_from": "2008-02-29T01:33:46+00:00",
+        "valid_until": "2035-07-17T01:33:46+00:00",
+        "signature_algorithm": "sha1WithRSAEncryption",
+        "sha256_fingerprint": "a40da80a59d170caa950cf15c18c454d47a39b26989d8b640ecd745ba71bf5dc",
+        "is_self_signed": true
+      }
+    ],
+    "permissions_all": [
+      "android.permission.SEND_SMS",
+      "android.permission.FOREGROUND_SERVICE_DATA_SYNC",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.USE_EXACT_ALARM",
+      "android.permission.READ_PHONE_NUMBERS",
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.REQUEST_DELETE_PACKAGES",
+      "android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION",
+      "android.permission.SCHEDULE_EXACT_ALARM",
+      "android.permission.READ_SMS",
+      "android.permission.VIBRATE",
+      "android.permission.WAKE_LOCK",
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_WIFI_STATE",
+      "android.permission.WRITE_EXTERNAL_STORAGE",
+      "android.permission.CAMERA",
+      "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+      "android.permission.FLASHLIGHT",
+      "android.permission.READ_PHONE_STATE",
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.MANAGE_EXTERNAL_STORAGE",
+      "android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED",
+      "com.android.alarm.permission.SET_ALARM",
+      "android.permission.SET_WALLPAPER",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.RECEIVE_BOOT_COMPLETED",
+      "scanner.scrubber.processor.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "permissions_flagged": [
+      "android.permission.SEND_SMS",
+      "android.permission.READ_SMS",
+      "android.permission.CAMERA"
+    ],
+    "iocs": {
+      "ip": [
+        "0.0.0.0",
+        "127.0.0.1"
+      ],
+      "url": [
+        "http://schemas.android.com/apk/res-auto",
+        "http://schemas.android.com/apk/res/android",
+        "https://developer.android.com/training/articles/direct-boot",
+        "https://issuetracker.google.com/issues/new?component=413107&template=1096568"
+      ],
+      "domain": [
+        "android.com",
+        "android.net",
+        "android.org",
+        "coroutines.io",
+        "gms.org",
+        "google.com",
+        "java.net",
+        "javax.net",
+        "jcraft.com",
+        "openjsse.net",
+        "openssh.com"
+      ],
+      "email": [
+        "auth-agent-req@openssh.com",
+        "auth-agent@openssh.com",
+        "hardlink@openssh.com",
+        "keepalive@jcraft.com",
+        "no-more-sessions@openssh.com",
+        "posix-rename@openssh.com",
+        "statvfs@openssh.com",
+        "zlib@openssh.com"
+      ]
+    },
+    "phone_number_details": [
+      {
+        "number": "6792371655",
+        "valid": true,
+        "region": "Baripada, Odisha",
+        "carrier": "Unknown",
+        "country_code": "IN"
+      },
+      {
+        "number": "9643384079",
+        "valid": true,
+        "region": "India",
+        "carrier": "Unknown",
+        "country_code": "IN"
+      },
+      {
+        "number": "8552707169",
+        "valid": true,
+        "region": "Gooty/Guntakal, Andhra Pradesh",
+        "carrier": "Vodafone",
+        "country_code": "IN"
+      },
+      {
+        "number": "9274745671",
+        "valid": true,
+        "region": "India",
+        "carrier": "Tata Docomo",
+        "country_code": "IN"
+      },
+      {
+        "number": "9445714579",
+        "valid": true,
+        "region": "India",
+        "carrier": "BSNL MOBILE",
+        "country_code": "IN"
+      }
+    ]
+  },
+  "dynamic": {
+    "domains": [],
+    "dest_ips": [],
+    "connections": []
+  },
+  "correlation": {
+    "confirmed_domains": [],
+    "confirmed_ips": [],
+    "static_only_domains": [
+      "android.com",
+      "android.net",
+      "android.org",
+      "coroutines.io",
+      "gms.org",
+      "google.com",
+      "http://schemas.android.com/apk/res-auto",
+      "http://schemas.android.com/apk/res/android",
+      "https://developer.android.com/training/articles/direct-boot",
+      "https://issuetracker.google.com/issues/new?component=413107&template=1096568",
+      "java.net",
+      "javax.net",
+      "jcraft.com",
+      "openjsse.net",
+      "openssh.com"
+    ],
+    "static_only_ips": [
+      "0.0.0.0",
+      "127.0.0.1"
+    ],
+    "dynamic_only_domains": [],
+    "dynamic_only_ips": [],
+    "flag": "No unexplained runtime connections detected."
+  },
+  "kill_switch": {
+    "triggered": false,
+    "reason": null
+  }
+}

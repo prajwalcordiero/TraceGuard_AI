@@ -19,10 +19,11 @@ from emulator_controller import (
     start_emulator, install_apk, launch_app,
     simulate_interaction, stop_emulator, get_package_name,
 )
+from kill_switch import KillSwitchMonitor
 from pcap_parser import parse_pcap
 from correlate import correlate
 
-AVD_NAME = "dynamic-analysis"
+AVD_NAME = "dynamic-analysis-clean"
 CAPTURE_SECONDS = 45
 PCAP_PATH = "capture.pcap"
 
@@ -41,8 +42,23 @@ def run_pipeline(apk_path):
         launch_app(package_name)
         simulate_interaction(taps=5, delay=2)
 
-        print(f"[*] Letting app run for {CAPTURE_SECONDS}s to capture traffic...")
-        time.sleep(CAPTURE_SECONDS)
+        kill_switch_result = {"triggered": False, "reason": None}
+
+        def on_danger(pattern, line):
+            kill_switch_result["triggered"] = True
+            kill_switch_result["reason"] = f"{pattern} — {line}"
+            print(f"\n🚨 Kill switch triggered: {pattern}")
+
+        monitor = KillSwitchMonitor(on_trigger=on_danger)
+        monitor.start()
+
+        print(f"[*] Letting app run for up to {CAPTURE_SECONDS}s, watching for danger...")
+        waited = 0
+        while waited < CAPTURE_SECONDS and not kill_switch_result["triggered"]:
+            time.sleep(1)
+            waited += 1
+
+        monitor.stop()
     finally:
         stop_emulator(emu_proc)
         time.sleep(3)  # let the pcap file flush to disk
@@ -57,6 +73,7 @@ def run_pipeline(apk_path):
         "static": static_result,
         "dynamic": dynamic_result,
         "correlation": correlation_result,
+        "kill_switch": kill_switch_result,
     }
 
 

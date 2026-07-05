@@ -27,7 +27,7 @@ def get_package_name(apk_path):
     return a.get_package()
 
 
-def start_emulator(avd_name, pcap_output_path, boot_timeout=90):
+def start_emulator(avd_name, pcap_output_path, boot_timeout=240):
     """Boots the emulator with all guest traffic captured to pcap_output_path."""
     proc = subprocess.Popen(
         [
@@ -36,12 +36,14 @@ def start_emulator(avd_name, pcap_output_path, boot_timeout=90):
             "-no-snapshot",
             "-tcpdump", pcap_output_path,
             "-no-audio",
+            "-no-boot-anim",
+            "-accel", "on",
         ],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
 
-    print("[*] Waiting for emulator to boot...")
+    print("[*] Waiting for emulator to boot (this can take 2-4 minutes)...")
     subprocess.run([ADB, "wait-for-device"], timeout=boot_timeout)
 
     # Poll until Android has fully finished booting, not just adb-visible
